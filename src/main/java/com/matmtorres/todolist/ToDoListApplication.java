@@ -1,4 +1,4 @@
-package com.matmtorres.to_do_list;
+package com.matmtorres.todolist;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

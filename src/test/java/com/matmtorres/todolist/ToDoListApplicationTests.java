@@ -1,4 +1,4 @@
-package com.matmtorres.to_do_list;
+package com.matmtorres.todolist;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
