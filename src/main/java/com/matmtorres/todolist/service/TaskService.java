@@ -6,25 +6,34 @@ import com.matmtorres.todolist.dto.task.TaskInfoResponse;
 import com.matmtorres.todolist.model.Task;
 import com.matmtorres.todolist.model.User;
 import com.matmtorres.todolist.repository.TaskRepository;
+import com.matmtorres.todolist.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class TaskService {
 
     private TaskRepository taskRepository;
+    private UserRepository userRepository;
 
     public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
 
-    public CreateTaskResponse createTask(CreateTaskRequest request, User user) {
+    public CreateTaskResponse createTask(CreateTaskRequest request) {
+
+        Optional<User> user = userRepository.findById(request.userId());
+
+        if(user.isEmpty()) {
+            throw new IllegalArgumentException("User doesn't exist");
+        }
 
         Task newTask = new Task(
                 null,
-                user,
+                user.get(),
                 request.title(),
                 request.description(),
                 request.startAt(),

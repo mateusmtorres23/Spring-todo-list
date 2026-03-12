@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("api/users")
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -25,7 +25,7 @@ public class UserController {
 
         CreateUserResponse newUser = userService.registerUser(request);
 
-        return  ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
 
     }
 
