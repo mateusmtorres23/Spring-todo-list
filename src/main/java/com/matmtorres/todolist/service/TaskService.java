@@ -16,11 +16,12 @@ import java.util.UUID;
 @Service
 public class TaskService {
 
-    private TaskRepository taskRepository;
-    private UserRepository userRepository;
+    private final TaskRepository taskRepository;
+    private final UserRepository userRepository;
 
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository, UserRepository userRepository) {
         this.taskRepository = taskRepository;
+        this.userRepository = userRepository;
     }
 
     public CreateTaskResponse createTask(CreateTaskRequest request) {

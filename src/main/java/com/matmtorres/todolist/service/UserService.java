@@ -1,5 +1,6 @@
 package com.matmtorres.todolist.service;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.matmtorres.todolist.dto.user.CreateUserRequest;
 import com.matmtorres.todolist.dto.user.CreateUserResponse;
 import com.matmtorres.todolist.dto.user.UserInfoResponse;
@@ -24,11 +25,14 @@ public class UserService {
             throw new IllegalStateException("Email already in use");
         });
 
+        String passwordHash = BCrypt.withDefaults()
+                .hashToString(12, request.password().toCharArray());
+
         User newUser = new User(
                 null,
                 request.name(),
                 request.email(),
-                request.password(),
+                passwordHash,
                 null
         );
 

@@ -18,6 +18,10 @@ public class FilterTask extends OncePerRequestFilter {
 
     private UserRepository userRepository;
 
+    public  FilterTask(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -37,9 +41,15 @@ public class FilterTask extends OncePerRequestFilter {
 
             if (user.isEmpty()) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
             }
 
             var passwordVerified = BCrypt.verifyer().verify(password.toCharArray(), user.get().getPasswordHash());
+
+            if (!passwordVerified.verified) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
+            }
 
             filterChain.doFilter(request, response);
         }

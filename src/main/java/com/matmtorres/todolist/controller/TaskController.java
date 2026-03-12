@@ -14,6 +14,10 @@ public class TaskController {
 
     private TaskService taskService;
 
+    public TaskController (TaskService taskService) {
+        this.taskService = taskService;
+    }
+
     @PostMapping
     public ResponseEntity<CreateTaskResponse> createTask(@RequestBody CreateTaskRequest request) {
 
