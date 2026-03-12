@@ -2,8 +2,7 @@ package com.matmtorres.todolist.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -15,7 +14,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-@EntityListeners(AuditingEntityListener.class)
 public class User {
 
     @Id
@@ -25,7 +23,7 @@ public class User {
     private String email;
     private String passwordHash;
     @Setter(AccessLevel.NONE)
-    @CreatedDate
+    @CreationTimestamp
     private LocalDateTime creationDate;
 
 }

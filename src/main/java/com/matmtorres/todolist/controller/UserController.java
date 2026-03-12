@@ -1,0 +1,34 @@
+package com.matmtorres.todolist.controller;
+
+import com.matmtorres.todolist.dto.user.CreateUserRequest;
+import com.matmtorres.todolist.dto.user.CreateUserResponse;
+import com.matmtorres.todolist.dto.user.UserInfoResponse;
+import com.matmtorres.todolist.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("api/users")
+public class UserController {
+
+    private UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping
+    public ResponseEntity<CreateUserResponse> createUser(@RequestBody CreateUserRequest request) {
+
+        CreateUserResponse newUser = userService.registerUser(request);
+
+        return  ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+
+    }
+
+
+
+}

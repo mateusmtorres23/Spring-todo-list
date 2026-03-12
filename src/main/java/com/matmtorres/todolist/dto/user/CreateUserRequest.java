@@ -1,4 +1,4 @@
-package com.matmtorres.todolist.dto;
+package com.matmtorres.todolist.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
